@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class PriorityQ {
 	private Node [] heap;
 
@@ -60,14 +62,18 @@ public class PriorityQ {
 	public Node pop() {
 		Node popped = heap[1];
 		heap[1] = null;
+		int last = 0;
 		// find last node
 		for (int i = 2; i < heap.length; i++) {
 			if (heap[i] == null) {
-				heap[1] = heap[i - 1];
-				heap[i-1] = null;
+				last = i - 1;
 				break;
 			}
 		}
+
+		if(last == 0) last = heap.length - 1;
+		heap[1] = heap[last];
+		heap[last] = null;		
 
 		boolean swapped = false;
 		int parent = 1;

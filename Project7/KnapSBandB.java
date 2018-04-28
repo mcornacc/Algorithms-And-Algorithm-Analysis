@@ -94,6 +94,8 @@ public class KnapSBandB {
 		Node topNode = baseNode;
 
 		while (!pQ.isEmpty()) {
+			// pQ.printHeap();
+			
 			Node current = pQ.pop();
 			System.out.println("\nExploring " + current.toString());
 
@@ -130,6 +132,6 @@ public class KnapSBandB {
 			}
 				
 		}
-		System.out.println("Best node: " +  topNode.toString()); 
+		System.out.println("\nBest node: " +  topNode.toString()); 
 	} 
 } 
