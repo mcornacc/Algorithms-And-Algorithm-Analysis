@@ -8,6 +8,11 @@ public class PriorityQ {
 
 	public void add(Node newNode) {
 		int freeLeaf = 0; 
+		if (heap[1] == null) {
+			heap[1] = newNode;
+			return;
+		}		
+
 		for (int i = 1; i < heap.length; i++) {
 			if (heap[i] == null) {
 				freeLeaf = i;
@@ -86,6 +91,10 @@ public class PriorityQ {
 		return popped;
 
 	} 
+
+	public boolean isEmpty() {
+		return (heap[1] == null);
+	}
 
 	public void printHeap() {
 		for (int i = 1; i < heap.length; i++) {

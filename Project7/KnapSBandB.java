@@ -3,7 +3,6 @@ import java.util.*;
 
 public class KnapSBandB { 
 	
-	private static double maxValue;
 	private static double inventory [][]; 
 	private static double maxWeight;
 	private static int nodeCount; 	
@@ -86,13 +85,51 @@ public class KnapSBandB {
 	} 
 
 	private static void solve() {
-		maxValue = 0.0;
 		Node baseNode = new Node(1, 0, new int[0], 0.0, 0.0, determineBound(0, 0.0, 0.0));
 		nodeCount = 1;
-		// PriorityQ pQ = new PriorityQ(baseNode);
+		PriorityQ pQ = new PriorityQ(baseNode);
 
 		System.out.println("Begin exploration of the possibilities tree:");
-	}
 
- 
+		Node topNode = baseNode;
+
+		while (!pQ.isEmpty()) {
+			Node current = pQ.pop();
+			System.out.println("\nExploring " + current.toString());
+
+			// check if worthless node
+			if (current.bound < topNode.profit) {
+				System.out.println("\tpruned, don't explore children" +
+					" because bound " + current.bound + " is smaller" +
+					" than known achievable profit " + topNode.profit);
+				continue;		
+			}
+			
+			//generate children
+			for (int i = 0; i < 2; i++) {
+				Node currentChild = generateNode(current, (i == 1));
+				System.out.println("\t" + ((i==0) ? "Left" : "Right") + 
+					 " child is " + currentChild.toString());
+				if (currentChild.weight > maxWeight) {
+					System.out.println("\t\tpruned because too heavy");
+					continue;	
+				} 
+				else if (currentChild.weight == maxWeight) {
+					System.out.println("\t\thit capacity exactly so" +
+						" don't explore further");
+				}
+				else {
+					System.out.println("\t\texplore further");
+					pQ.add(currentChild);
+				}
+
+				if (currentChild.profit > topNode.profit) {
+					System.out.println("\t\tnote achievable profit of " + currentChild.profit);
+					topNode = currentChild;
+				}
+			}
+				
+		}
+		System.out.println("Best node: " +  topNode.toString()); 
+	} 
 } 
