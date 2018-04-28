@@ -89,25 +89,7 @@ public class KnapSBandB {
 		maxValue = 0.0;
 		Node baseNode = new Node(1, 0, new int[0], 0.0, 0.0, determineBound(0, 0.0, 0.0));
 		nodeCount = 1;
-		PriorityQ pQ = new PriorityQ(baseNode);
-
-		Node leftChild = generateNode(baseNode, false);
-		Node rightChild = generateNode(baseNode, true);
-		pQ.add(leftChild);
-		pQ.add(rightChild);
-		System.out.println("\n\n");
-		pQ.printHeap();
-		
-		Node fakie = new Node(1337, 30, new int[0], 0.0, 0.0, 500);
-		System.out.println("\n\n");		
-
-		pQ.add(fakie);
-	
-		pQ.printHeap();
-                System.out.println("\n\n");
-		Node fakie2 = new Node(1338, 30, new int[0], 0.0, 0.0, 700); 
-		pQ.add(fakie2);
-		pQ.printHeap();
+		// PriorityQ pQ = new PriorityQ(baseNode);
 
 		System.out.println("Begin exploration of the possibilities tree:");
 	}
